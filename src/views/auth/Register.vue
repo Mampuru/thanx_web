@@ -53,12 +53,54 @@
                   class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                   htmlFor="grid-password"
                 >
+                  Username
+                </label>
+                <input
+                  type="email"
+                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                  placeholder="Username"
+                />
+              </div>
+
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlFor="grid-password"
+                >
                   Email
                 </label>
                 <input
                   type="email"
                   class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   placeholder="Email"
+                />
+              </div>
+
+            <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlFor="grid-password"
+                >
+                  Phone number
+                </label>
+                <input
+                  type="email"
+                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                  placeholder="Phone number"
+                />
+              </div>
+
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlFor="grid-password"
+                >
+                  Country
+                </label>
+                <input
+                  type="email"
+                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                  placeholder="Country"
                 />
               </div>
 
@@ -73,6 +115,20 @@
                   type="password"
                   class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   placeholder="Password"
+                />
+              </div>
+
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlFor="grid-password"
+                >
+                  Confirm Password
+                </label>
+                <input
+                  type="password"
+                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                  placeholder="Confirm Password"
                 />
               </div>
 
