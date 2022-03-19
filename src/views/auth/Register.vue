@@ -45,6 +45,7 @@
                   type="email"
                   class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   placeholder="Name"
+                  v-model="name"
                 />
               </div>
 
@@ -59,6 +60,7 @@
                   type="email"
                   class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   placeholder="Username"
+                  v-model="username"
                 />
               </div>
 
@@ -73,6 +75,7 @@
                   type="email"
                   class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   placeholder="Email"
+                  v-model="email"
                 />
               </div>
 
@@ -87,6 +90,7 @@
                   type="email"
                   class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   placeholder="Phone number"
+                  v-model="phone"
                 />
               </div>
 
@@ -101,6 +105,7 @@
                   type="email"
                   class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   placeholder="Country"
+                  v-model="country"
                 />
               </div>
 
@@ -115,6 +120,7 @@
                   type="password"
                   class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   placeholder="Password"
+                  v-model="password"
                 />
               </div>
 
@@ -129,6 +135,7 @@
                   type="password"
                   class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   placeholder="Confirm Password"
+                  v-model="confirm_password"
                 />
               </div>
 
@@ -152,6 +159,7 @@
                 <button
                   class="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
                   type="button"
+                  v-on:click="register()"
                 >
                   Create Account
                 </button>
@@ -164,15 +172,36 @@
   </div>
 </template>
 <script>
-import github from "@/assets/img/github.svg";
-import google from "@/assets/img/google.svg";
+import axios from 'axios'
 
 export default {
   data() {
     return {
-      github,
-      google,
+      name:"",
+      username:"",
+      email:"",
+      phone:"",
+      country:"",
+      password:"",
+      confirm_password:""
     };
   },
+  methods: {
+    register(){
+      const payload = JSON.stringify({
+         name: this.name,
+         username: this.username,
+         email: this.email,
+         phone: this.phone,
+         country: this.country,
+         password: this.password,});
+      axios.post("http://api.mythanx.xyz/auth/signup",payload,{
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      console.warn("I have been clicked")
+    },
+  }
 };
 </script>
