@@ -14,6 +14,7 @@ import App from "@/App.vue";
 
 import Admin from "@/layouts/Admin.vue";
 import Auth from "@/layouts/Auth.vue";
+// import Shop from "@/layouts/Shop.vue";
 
 // views for Admin layout
 
@@ -29,9 +30,12 @@ import Register from "@/views/auth/Register.vue";
 
 // views without layouts
 
-import Landing from "@/views/Landing.vue";
+import UserArea from "@/views/shop/UserArea.vue";
+import ProductDetails from "@/views/shop/ProductDetails.vue";
 import Profile from "@/views/Profile.vue";
 import Index from "@/views/Index.vue";
+
+import Store from "@/store/index.js";
 
 // routes
 
@@ -75,8 +79,12 @@ const routes = [
     ],
   },
   {
-    path: "/landing",
-    component: Landing,
+    path: "/shop/user_area",
+    component: UserArea,
+  },
+  {
+    path: "/shop/product_details",
+    component: ProductDetails,
   },
   {
     path: "/profile",
@@ -94,4 +102,4 @@ const router = createRouter({
   routes,
 });
 
-createApp(App).use(router).mount("#app");
+createApp(App).use(router).use(Store).mount("#app");

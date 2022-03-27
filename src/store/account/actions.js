@@ -1,12 +1,12 @@
 import { axios } from "axios";
 
 
-export function login({commit}){
+export function login({commit},payload){
     let url = 'http://api.mythanx.xyz/auth/login';
     
-    const payload = JSON.stringify({
-        username: this.username,
-        password: this.password,});
+    // const payload = JSON.stringify({
+    //     username: this.username,
+    //     password: this.password,});
         axios.post(url,payload,{
             headers: {
               'Content-Type': 'application/json'
@@ -23,22 +23,22 @@ export function login({commit}){
         
            //Saving the userData from to state
            commit("setUserData",userData)
-           router.push('/')
+        //    router.push('/')
         }).catch(function (error){
             console.log(error)
         })
 }
 
-export function register({commit}){
+export function register({commit},payload){
     let url = 'http://api.mythanx.xyz/auth/signup';
 
-    const payload = JSON.stringify({
-        name: this.name,
-        username: this.username,
-        email: this.email,
-        phone: this.phone,
-        country: this.country,
-        password: this.password,});
+    // const payload = JSON.stringify({
+    //     name: this.name,
+    //     username: this.username,
+    //     email: this.email,
+    //     phone: this.phone,
+    //     country: this.country,
+    //     password: this.password,});
         axios.post(url,payload,{
             headers: {
               'Content-Type': 'application/json'
@@ -55,7 +55,7 @@ export function register({commit}){
         
            //Saving the userData from to state
            commit("setUserData",userData)
-           router.push('/')
+        //    router.push('/')
         }).catch(function (error){
             console.log(error)
         })

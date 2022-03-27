@@ -66,7 +66,7 @@
               </a>
               </router-link>
           </li> -->
-          <li class="flex items-center">
+          <!-- <li class="flex items-center">
              <router-link to="/">
               <a
                 class="text-blueGray-700 text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap "
@@ -75,6 +75,9 @@
                 Services
               </a>
               </router-link>
+          </li> -->
+           <li class="flex items-center">
+             <IndexDropdown />
           </li>
           <li class="flex items-center">
              <router-link to="/auth/login">
@@ -92,7 +95,7 @@
 </template>
 
 <script>
-// import IndexDropdown from "@/components/Dropdowns/IndexDropdown.vue";
+import IndexDropdown from "@/components/Dropdowns/IndexDropdown.vue";
 import thanx_logo from "@/assets/img/thanx_logo.png";
 
 export default {
@@ -108,7 +111,7 @@ export default {
     },
   },
   components: {
-    // IndexDropdown,
+    IndexDropdown
   },
 };
 </script>
