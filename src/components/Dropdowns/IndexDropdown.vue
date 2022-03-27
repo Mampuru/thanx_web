@@ -1,12 +1,12 @@
 <template>
   <div>
     <a
-      class="hover:text-blueGray-500 text-blueGray-700 px-3 py-2 flex items-center text-xs uppercase font-bold"
+      class="hover:text-blueGray-700 text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap"
       href="#pablo"
       ref="btnDropdownRef"
       v-on:click="toggleDropdown($event)"
     >
-      Demo Pages
+      Products
     </a>
     <div
       ref="popoverDropdownRef"
@@ -16,70 +16,41 @@
         block: dropdownPopoverShow,
       }"
     >
-      <span
-        class="text-sm pt-2 pb-0 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-400"
-      >
-        Admin Layout
-      </span>
       <router-link
         to="/admin/dashboard"
         class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
       >
-        Dashboard
+        Subscriptions
+      </router-link>
+      <router-link
+        to="/admin/dashboard"
+        class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+      >
+        Rewards
       </router-link>
       <router-link
         to="/admin/settings"
         class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
       >
-        Settings
+        Rewards Bundle
       </router-link>
       <router-link
         to="/admin/tables"
         class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
       >
-        Tables
+        Vouchers
       </router-link>
       <router-link
         to="/admin/maps"
         class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
       >
-        Maps
+        Donations
       </router-link>
-      <div class="h-0 mx-4 my-2 border border-solid border-blueGray-100" />
-      <span
-        class="text-sm pt-2 pb-0 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-400"
-      >
-        Auth Layout
-      </span>
       <router-link
         to="/auth/login"
         class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
       >
-        Login
-      </router-link>
-      <router-link
-        to="/auth/register"
-        class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
-      >
-        Register
-      </router-link>
-      <div class="h-0 mx-4 my-2 border border-solid border-blueGray-100" />
-      <span
-        class="text-sm pt-2 pb-0 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-400"
-      >
-        No Layout
-      </span>
-      <router-link
-        to="/landing"
-        class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
-      >
-        Landing
-      </router-link>
-      <router-link
-        to="/profile"
-        class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
-      >
-        Profile
+        Add Funds
       </router-link>
     </div>
   </div>
