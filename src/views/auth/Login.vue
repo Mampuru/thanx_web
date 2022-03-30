@@ -45,7 +45,7 @@
                   type="text"
                   class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   placeholder="Username"
-                  v-model="username"
+                  v-model="input.username"
                 />
               </div>
 
@@ -60,7 +60,7 @@
                   type="password"
                   class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   placeholder="Password"
-                  v-model="password"
+                  v-model="input.password"
                 />
               </div>
               <div>
@@ -105,27 +105,32 @@
   </div>
 </template>
 <script>
-import axios from 'axios'
+import {useStore} from "vuex";
+import {ref} from "vue"
+import { useRouter } from "vue-router";
 
 export default {
-  data() {
-    return {
+   setup(){
+    const store = useStore();
+    const router = useRouter();
+
+    const input = ref({
       username: "",
-      password: "",
-    };
-  },
-  methods: {
-    login(){
-      const payload = JSON.stringify({
-         username: this.username,
-         password: this.password,});
-      axios.post("http://api.mythanx.xyz/auth/login",payload,{
-        headers: {
-          'Content-Type': 'application/json'
-        }
+      password:"",
+    });
+
+   
+    function login(){
+      store.dispatch("login",input.value).then(() => {
+        router.push("/shop/user_area")
       })
-      console.warn("I have been clicked")
-    },
-  }
+    }
+
+    return{
+      input,
+      login
+    }
+
+  },
 };
 </script>
