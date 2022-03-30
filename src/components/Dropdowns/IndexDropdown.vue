@@ -17,37 +17,37 @@
       }"
     >
       <router-link
-        to="/admin/dashboard"
+        to="/shop/product/subscription"
         class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
       >
         Subscriptions
       </router-link>
       <router-link
-        to="/admin/dashboard"
+        to="/shop/product/rewards"
         class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
       >
         Rewards
       </router-link>
       <router-link
-        to="/admin/settings"
+        to="/shop/product/rewards_bundle"
         class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
       >
         Rewards Bundle
       </router-link>
       <router-link
-        to="/admin/tables"
+        to="/shop/product/voucher"
         class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
       >
         Vouchers
       </router-link>
       <router-link
-        to="/admin/maps"
+        to="/shop/product/donation"
         class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
       >
         Donations
       </router-link>
       <router-link
-        to="/auth/login"
+        to="/shop/product/add_fund"
         class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
       >
         Add Funds
