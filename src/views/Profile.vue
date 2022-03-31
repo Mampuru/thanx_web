@@ -62,6 +62,12 @@
                     >
                       Edit Profile
                     </button>
+                    <button
+                      class="bg-red-500 active:bg-blueGray-800 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
+                      type="button"
+                    >
+                      Logout
+                    </button>
                   </div>
                 </div>
                 <div class="w-full lg:w-4/12 px-4 lg:order-1">
@@ -97,7 +103,7 @@
                 <h3
                   class="text-4xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2"
                 >
-                  Jone Doe
+                  {{user.name}}
                 </h3>
                 <div
                   class="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase"
@@ -105,7 +111,7 @@
                   <i
                     class="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"
                   ></i>
-                  Los Angeles, California
+                  {{user.country}}
                 </div>
                 <!-- <div class="mb-2 text-blueGray-600 mt-10">
                   <i
@@ -155,8 +161,23 @@ import Navbar from "@/components/Navbars/AuthNavbar.vue";
 import FooterComponent from "@/components/Footers/Footer.vue";
 
 import team2 from "@/assets/img/vue.jpg";
+import {useStore} from "vuex";
+import {computed} from "vue"
 
 export default {
+  setup(){
+    const store = useStore();
+
+    const user = computed(() => store.getters.getUser);
+    console.log(user.value)
+    console.log(user.value.token)
+
+    return{
+      user,
+    }
+
+  },
+
   data() {
     return {
       team2,

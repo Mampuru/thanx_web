@@ -75,7 +75,7 @@
                 laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
               </p>
               <router-link to="/" class="font-bold text-blueGray-700 mt-8">
-                {{$store.state.userData.name}}
+                
               </router-link>
             </div>
 

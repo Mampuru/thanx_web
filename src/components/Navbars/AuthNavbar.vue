@@ -53,43 +53,42 @@
               </a>
               </router-link>
           </li>
-          <!-- <li class="flex items-center">
-             <router-link to="/">
-              <a
-                class="text-blueGray-700 text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap "
-                href="#pablo"
-              >
-                Our Values
-              </a>
-              </router-link>
-          </li> -->
-          <!-- <li class="flex items-center">
-             <router-link to="/">
-              <a
-                class="text-blueGray-700 text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap "
-                href="#pablo"
-              >
-                Services
-              </a>
-              </router-link>
-          </li> -->
-          <li class="flex items-center">
-              <a
-                class="text-blueGray-700 text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap "
-                href="#pablo"
-              >
-              <IndexDropdown />
-              </a>
-             
-          </li>
-          <li class="flex items-center">
-             <router-link to="/auth/login">
+          <template v-if="auth === true">
+            <li class="flex items-center" >
+                        <router-link to="/shop/user_area">
+                          <a
+                            class="text-blueGray-700 text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap "
+                            href="#pablo"
+                          >
+                  Wallet
+                </a>
+                </router-link>
+            </li>
+            <li class="flex items-center">
+                <a
+                  class="text-blueGray-700 text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap "
+                  href="#pablo"
+                >
+                <IndexDropdown />
+                </a>
+            </li>
+          </template>
+         
+          <li class="flex items-center" v-if="auth === true" >
+             <router-link to="/profile" >
               <a>
-                <i class="text-blueGray-900 fas fa-user-circle text-lg leading-lg" />
-                <span class="inline-block ml-2 ">Sign in</span>
+                <i class="text-blueGray-900 fas fa-user text-2xl leading-lg" />
+                <span class="inline-block ml-2 " >Welcome {{name}}</span>
               </a>
-             </router-link>
-              
+             </router-link> 
+          </li>
+           <li class="flex items-center" v-else>
+             <router-link to="/auth/login" >
+              <a>
+                <i class="text-blueGray-900 fas fa-sign-in-alt text-2xl leading-lg" />
+                <span class="inline-block ml-2 ">Login/Register</span>
+              </a>
+             </router-link> 
           </li>
         </ul>
       </div>
@@ -101,7 +100,22 @@
 import IndexDropdown from "@/components/Dropdowns/IndexDropdown.vue";
 import thanx_logo from "@/assets/img/thanx_logo.png";
 
+import {useStore} from "vuex";
+import {computed} from "vue"
+
 export default {
+  setup(){
+    const store = useStore();
+
+    const auth = computed(() => store.getters.getIsAuthenticated,{setImmediate: true});
+    const name = computed(() => store.getters.getUser.username);
+
+    return{
+      name,
+      auth
+    }
+
+  },
   data() {
     return {
       navbarOpen: false,
