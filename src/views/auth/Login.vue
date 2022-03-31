@@ -121,9 +121,9 @@ export default {
 
    
     function login(){
-      store.dispatch("login",input.value).then(() => {
+      store.dispatch("login",input.value).then(
         router.push("/shop/user_area")
-      })
+      )
     }
 
     return{

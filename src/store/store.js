@@ -3,19 +3,28 @@ import  axios  from "axios";
 
 const store =  createStore({
   state: {
-    userData: {}
+    userData: {},
+    isAuthenticated: false 
   },
   getters: {
     //Getters
-    user(state) {
+    getUser(state) {
         return state.userData
-    }
+    },
+    getIsAuthenticated(state) {
+      return state.isAuthenticated
+  }
+
  },
     mutations: {
       //Setters
         setUserData(state, val){
             state.userData = val
-        }
+        },
+        setIsAuthenticated(state, val){
+          state.isAuthenticated = val
+      }
+
     },
     actions: {
         //methods
@@ -39,13 +48,47 @@ const store =  createStore({
                         country: response.data.data.user.country,
                     }
                    //Saving the userData from to state
+                   commit("setIsAuthenticated",true)
                    commit("setUserData",userData)
-                   return 200
+
                 }).catch(function (error){
                     console.log(error)
                    return 403
                 })
-        }
+        },
+
+        register({commit},payload){
+          let url = 'http://api.mythanx.xyz/auth/signup';
+          const payload2 = JSON.stringify({
+            username: payload.username,
+            password: payload.password,
+            name: payload.name,
+            country: payload.country,
+            phone: payload.phone,
+            email: payload.email
+          });
+
+              axios.post(url,payload2,{
+                  headers: {
+                    'Content-Type': 'application/json'
+                  }
+              }).then(function (response){
+                 let userData = {
+                     token: response.data.token,
+                     name: response.data.user.name,
+                     username: response.data.user.username,
+                     email: response.data.user.email,
+                     phone: response.data.user.phone,
+                     country: response.data.user.country,
+                 }
+                 console.log(userData)
+                 //Saving the userData from to state
+                 commit("setIsAuthenticated",true)
+                 commit("setUserData",userData)
+              }).catch(function (error){
+                  console.log(error)
+              })
+      }
         
     },
 });

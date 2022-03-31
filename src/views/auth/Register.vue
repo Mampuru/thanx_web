@@ -172,36 +172,36 @@
   </div>
 </template>
 <script>
-import axios from 'axios'
+import {useStore} from "vuex";
+import {ref} from "vue"
+import { useRouter } from "vue-router";
 
 export default {
-  data() {
-    return {
-      name:"",
-      username:"",
-      email:"",
-      phone:"",
-      country:"",
+   setup(){
+    const store = useStore();
+    const router = useRouter();
+
+    const input = ref({
+      username: "",
       password:"",
-      confirm_password:""
-    };
+      name: "",
+      email:"",
+      phone: "",
+      confirm_password:"",
+    });
+
+   
+    function register(){
+      store.dispatch("register",input.value).then(
+        router.push("/shop/user_area")
+      )
+    }
+
+    return{
+      input,
+      register
+    }
+
   },
-  methods: {
-    register(){
-      const payload = JSON.stringify({
-         name: this.name,
-         username: this.username,
-         email: this.email,
-         phone: this.phone,
-         country: this.country,
-         password: this.password,});
-      axios.post("http://api.mythanx.xyz/auth/signup",payload,{
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-      console.warn("I have been clicked")
-    },
-  }
 };
 </script>

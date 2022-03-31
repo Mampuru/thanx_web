@@ -1418,6 +1418,11 @@ select {
   background-color: rgba(71, 85, 105, var(--tw-bg-opacity));
 }
 
+.active\:bg-blueGray-800:active {
+  --tw-bg-opacity: 1;
+  background-color: rgba(30, 41, 59, var(--tw-bg-opacity));
+}
+
 .bg-none {
   background-image: none;
 }
