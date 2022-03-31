@@ -1,11 +1,10 @@
 <template>
   <div>
     <navbar />
-    <main class="">
-      <div class="flex flex-wrap">
-    <main class="" style="margin-top: 5rem; margin-bottom:5rem; padding:">
-      <div class="flex flex-wrap">
-        <div class="w-full md:w-5/12 px-4 flex-1" style="padding: 10rem;">
+    <main style="margin-top: 5rem; margin-bottom:5rem; padding:">
+      <div class="container mx-auto px-4">">
+        <div class="item-center flex flex-wrap">
+        <div class="w-full md:w-8/12 px-4 flex-1" style="padding: 4rem;">
           <div class="bg-lightBlue-700 shadow-lg rounded-lg text-center p-8">
             <i class="fas fa-wallet text-white text-3xl"></i>
             <p class="text-3xl text-white mt-4 font-semibold">Subscriptions</p>
@@ -56,7 +55,6 @@
         </div>
         </div>
       </div>
-    </main>
       </div>
     </main>
     <footer-component />
