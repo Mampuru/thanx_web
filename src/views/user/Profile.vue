@@ -59,6 +59,7 @@
                     <button
                       class="bg-blueGray-700 active:bg-blueGray-800 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
                       type="button"
+                      v-on:click="nextPage()"
                     >
                       Edit Profile
                     </button>
@@ -163,16 +164,21 @@ import FooterComponent from "@/components/Footers/Footer.vue";
 import team2 from "@/assets/img/vue.jpg";
 import {useStore} from "vuex";
 import {computed} from "vue"
-
+import { useRouter } from "vue-router";
+ 
 export default {
   setup(){
     const store = useStore();
+    const router = useRouter();
 
     const user = computed(() => store.getters.getUser);
-    console.log(user.value)
-    console.log(user.value.token)
+
+    function nextPage(){
+      router.push("/edit_profile")
+    }
 
     return{
+      nextPage,
       user,
     }
 
