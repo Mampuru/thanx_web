@@ -2,6 +2,6 @@
 module.exports = {
   runtimeCompiler: true,
   devServer: {
-    proxy: 'http://api.mythanx.xyz/',
+    proxy: 'https://api.mythanx.xyz/',
     }
 };
