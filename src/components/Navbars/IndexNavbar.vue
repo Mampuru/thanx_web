@@ -76,14 +76,15 @@
               </a>
               </router-link>
           </li> -->
-           <li class="flex items-center">
+           <li class="flex items-center" v-if="name !== null">
              <IndexDropdown />
           </li>
           <li class="flex items-center">
              <router-link to="/auth/login">
               <a>
-                <i class="text-blueGray-900 fas fa-user-circle text-lg leading-lg" />
-                <span class="inline-block ml-2 ">Sign in</span>
+                <i class="text-blueGray-900 fas fa-right-to-bracket text-lg leading-lg" />
+                <span class="inline-block ml-2 " v-if="name !== null" >Login/Register</span>
+                <span class="inline-block ml-2 " v-else >{{name}}</span>
               </a>
              </router-link>
               
@@ -98,7 +99,22 @@
 import IndexDropdown from "@/components/Dropdowns/IndexDropdown.vue";
 import thanx_logo from "@/assets/img/thanx_logo.png";
 
+import {useStore} from "vuex";
+import {computed} from "vue"
+
 export default {
+  setup(){
+    const store = useStore();
+
+    const name = computed(() => store.getter.userData.name);
+
+    return{
+      input,
+      name
+    }
+
+  },
+
   data() {
     return {
       navbarOpen: false,
