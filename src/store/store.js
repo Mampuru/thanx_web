@@ -5,7 +5,8 @@ const store =  createStore({
   state() {
     return {
       userData: {},
-      isAuthenticated: false 
+      isAuthenticated: false,
+      country: {}, 
     }
   },
   getters: {
@@ -15,7 +16,10 @@ const store =  createStore({
     },
     getIsAuthenticated(state) {
       return state.isAuthenticated
-  }
+    },
+    getCountry(state) {
+      return state.country
+    }
 
  },
     mutations: {
@@ -25,7 +29,10 @@ const store =  createStore({
         },
         setIsAuthenticated(state, val){
           state.isAuthenticated = val
-      }
+        },
+        setCountry(state, val){
+          state.country = val
+        },
 
     },
     actions: {
@@ -60,38 +67,52 @@ const store =  createStore({
                 })
         },
 
-        async register({commit},payload){
-            let url = 'https://api.mythanx.xyz/auth/signup';
-            const payload2 = JSON.stringify({
-              username: payload.username,
-              password: payload.password,
-              name: payload.name,
-              country: payload.country,
-              phone: payload.phone,
-              email: payload.email
-            });
-              axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
-              await axios.post(url,payload2,{
-                    headers: {
-                      'Content-Type': 'application/json'
-                    }
-                }).then(function (response){
-                  let userData = {
-                    token: response.data.data.token,
-                    name: response.data.data.user.name,
-                    username: response.data.data.user.username,
-                    email: response.data.data.user.email,
-                    phone: response.data.data.user.phone,
-                    country: response.data.data.user.country,
+      async register({commit},payload){
+        let url = 'https://api.mythanx.xyz/auth/signup';
+        const payload2 = JSON.stringify({
+          username: payload.username,
+          password: payload.password,
+          name: payload.name,
+          country: payload.country,
+          phone: payload.phone,
+          email: payload.email
+        });
+          axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+          await axios.post(url,payload2,{
+                headers: {
+                  'Content-Type': 'application/json'
                 }
-                  //Saving the userData from to state
-                  commit("setIsAuthenticated",true)
-                  commit("setUserData",userData)
-                }).catch(function (error){
-                    console.log(error)
-                })
-      }
-        
+            }).then(function (response){
+              let userData = {
+                token: response.data.data.token,
+                name: response.data.data.user.name,
+                username: response.data.data.user.username,
+                email: response.data.data.user.email,
+                phone: response.data.data.user.phone,
+                country: response.data.data.user.country,
+            }
+              //Saving response to state
+              commit("setIsAuthenticated",true)
+              commit("setUserData",userData)
+            }).catch(function (error){
+                console.log(error)
+            })
+     },
+
+     async fetchCountry({commit},){
+      let url = 'https://api.mythanx.xyz/data/countries';
+        axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+        await axios.get(url,{
+              headers: {
+                'Content-Type': 'application/json'
+              }
+          }).then(function (response){
+            //Saving response to state
+            commit("setCountry",response.data.data)
+          }).catch(function (error){
+              console.log(error)
+          })
+      },
     },
 });
 
