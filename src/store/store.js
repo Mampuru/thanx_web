@@ -84,7 +84,6 @@ const store =  createStore({
                     phone: response.data.data.user.phone,
                     country: response.data.data.user.country,
                 }
-                  console.log(userData)
                   //Saving the userData from to state
                   commit("setIsAuthenticated",true)
                   commit("setUserData",userData)

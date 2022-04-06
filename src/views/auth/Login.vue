@@ -119,11 +119,9 @@ export default {
       password:"",
     });
 
-   
     function login(){
-      store.dispatch("login",input.value).then(
-        router.push("/shop/user_area")
-      )
+      store.dispatch("login",input.value)
+       router.push("/shop/user_area",)
     }
 
     return{
