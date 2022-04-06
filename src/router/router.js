@@ -21,7 +21,8 @@ import Register from "@/views/auth/Register.vue";
 
 import UserArea from "@/views/shop/UserArea.vue";
 import ProductDetails from "@/views/shop/ProductDetails.vue";
-import Profile from "@/views/Profile.vue";
+import Profile from "@/views/user/Profile.vue";
+import EditProfile from "@/views/user/EditProfile.vue";
 import Index from "@/views/Index.vue";
 
 // view for products
@@ -110,6 +111,10 @@ const routes = [
   {
     path: "/profile",
     component: Profile,
+  },
+  {
+    path: "/edit_profile",
+    component: EditProfile,
   },
   {
     path: "/",
