@@ -71,30 +71,29 @@
                 >
                   Country
                 </label>
-                <input
-                  type="email"
-                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                  placeholder="Country"
-                  v-model="input.country"
-                />
+                <select v-model="input.country"  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                  <option :key="item" v-for="item in countryList" :value="item.code">{{item.name}}</option>
+                </select>
               </div>
 
-              <div class="relative w-full mb-3">
-                <label
-                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                  htmlFor="grid-password"
-                >
-                  Email
-                </label>
-                <input
-                  type="email"
-                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                  placeholder="Email"
-                  v-model="input.email"
-                />
+              <div class="container px-4 mx-auto">
+                <div class="flex flex-wrap">
+                <div class="w-full px-4 flex-1">
+                  <span class="text-sm block my-4 p-3 text-blueGray-700">
+                    <input type="radio" id="phone" value="phone" v-model="picked">
+                    <label class="uppercase text-blueGray-600 text-xs font-bold mb-2" for="one" style="margin-left: 1rem;">Phone number</label>
+                  </span>
+                </div>
+                <div class="w-full px-4 flex-1">
+                  <span class="text-sm block my-4 p-3 text-blueGray-700 ">
+                    <input type="radio" id="email" value="email" v-model="picked" style="margin-left: 1rem;">
+                    <label class="uppercase text-blueGray-600 text-xs font-bold mb-2" for="two" style="margin-left: 1rem;">Email</label>
+                  </span>
+                </div>
               </div>
-
-            <div class="relative w-full mb-3">
+              </div>
+          
+            <div class="relative w-full mb-3" v-if="picked === 'phone'">
                 <label
                   class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                   htmlFor="grid-password"
@@ -106,6 +105,21 @@
                   class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   placeholder="Phone number"
                   v-model="input.phone"
+                />
+              </div>
+
+              <div class="relative w-full mb-3" v-else>
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlFor="grid-password"
+                >
+                  Email
+                </label>
+                <input
+                  type="email"
+                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                  placeholder="Email"
+                  v-model="input.email"
                 />
               </div>
 
@@ -158,7 +172,7 @@
 </template>
 <script>
 import {useStore} from "vuex";
-import {ref} from "vue"
+import {ref,onMounted, computed } from "vue"
 import { useRouter } from "vue-router";
 
 export default {
@@ -174,6 +188,13 @@ export default {
       phone: "",
     });
 
+    const picked = ref("phone");
+
+    const countryList = computed(() => store.getters.getCountry)
+
+    onMounted(() => {
+      store.dispatch("fetchCountry")
+    })
    
     function register(){
       store.dispatch("register",input.value).then(
@@ -183,7 +204,9 @@ export default {
 
     return{
       input,
-      register
+      register,
+      countryList,
+      picked,
     }
 
   },
