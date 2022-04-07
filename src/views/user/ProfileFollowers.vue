@@ -93,7 +93,10 @@
 										align-items: center;
 									"
 								>
-									<div v-on:click="goto('following')">
+									<div
+										class="presence"
+										v-on:click="goto('following')"
+									>
 										<span
 											class="text-xl text-center font-bold block uppercase tracking-wide text-blueGray-600"
 										>
@@ -105,7 +108,10 @@
 											Following
 										</span>
 									</div>
-									<div v-on:click="goto('followers')">
+									<div
+										class="presence"
+										v-on:click="goto('followers')"
+									>
 										<span
 											class="text-xl text-center font-bold block uppercase tracking-wide text-blueGray-600"
 										>
@@ -133,12 +139,14 @@
 											class="bg-blueGray-700 active:bg-blueGray-800 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
 											type="button"
 											v-on:click="nextPage()"
+											v-if="authenticated"
 										>
 											Edit Profile
 										</button>
 										<button
 											class="bg-red-500 active:bg-blueGray-800 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
 											type="button"
+											v-if="authenticated"
 										>
 											Logout
 										</button>
@@ -153,9 +161,7 @@
 								Followers
 							</h3>
 
-							<div
-								class="tabs border-b border-blueGray-200"
-							>
+							<div class="tabs border-b border-blueGray-200">
 								<template v-for="(user, index) in followers">
 									<div
 										:key="index"
@@ -189,9 +195,15 @@
 											</h1>
 
 											<div
+												class="presence"
 												style="
 													font-size: 1em;
 													line-height: 1.26;
+												"
+												v-on:click="
+													goto('', {
+														base: user.username,
+													})
 												"
 											>
 												@{{ user.username }}
@@ -220,7 +232,14 @@
 												align-items: center;
 											"
 										>
-											<div v-on:click="goto('following', { base: user.username })">
+											<div
+												class="presence"
+												v-on:click="
+													goto('following', {
+														base: user.username,
+													})
+												"
+											>
 												<span
 													class="text-xl text-center font-bold block uppercase tracking-wide text-blueGray-600"
 												>
@@ -235,7 +254,14 @@
 													Following
 												</span>
 											</div>
-											<div v-on:click="goto('followers', { base: user.username })">
+											<div
+												class="presence"
+												v-on:click="
+													goto('followers', {
+														base: user.username,
+													})
+												"
+											>
 												<span
 													class="text-xl text-center font-bold block uppercase tracking-wide text-blueGray-600"
 												>
@@ -250,8 +276,6 @@
 												>
 											</div>
 										</div>
-
-										
 									</div>
 								</template>
 
@@ -275,8 +299,9 @@
 		<footer-component />
 	</div>
 </template>
-<style scoped>
-.tabs {
+<style>
+.presence:hover {
+	cursor: pointer;
 }
 </style>
 <script>

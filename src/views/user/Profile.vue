@@ -93,7 +93,7 @@
 										align-items: center;
 									"
 								>
-									<div v-on:click="goto('following')">
+									<div class="presence" v-on:click="goto('following')">
 										<span
 											class="text-xl text-center font-bold block uppercase tracking-wide text-blueGray-600"
 										>
@@ -105,7 +105,7 @@
 											Following
 										</span>
 									</div>
-									<div v-on:click="goto('followers')">
+									<div class="presence" v-on:click="goto('followers')">
 										<span
 											class="text-xl text-center font-bold block uppercase tracking-wide text-blueGray-600"
 										>
@@ -133,37 +133,35 @@
 											class="bg-blueGray-700 active:bg-blueGray-800 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
 											type="button"
 											v-on:click="nextPage()"
+											v-if="authenticated"
 										>
 											Edit Profile
 										</button>
 										<button
 											class="bg-red-500 active:bg-blueGray-800 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
 											type="button"
+											v-if="authenticated"
 										>
 											Logout
+										</button>
+
+                    <button
+											class="bg-red-500 active:bg-blueGray-800 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
+											type="button"
+											v-if="!authenticated"
+										>
+											Follow
 										</button>
 									</div>
 								</div>
 							</div>
 
-							<div
-								class="tabs flex border-b border-blueGray-200 flex-wrap"
+							<h3
+								class="border-b border-blueGray-200"
+								style="font-size: 2em; padding-bottom: 0.25em"
 							>
-								<app-tabs :tabList="tabList">
-									<template v-slot:tabPanel-1>
-										Content 1
-									</template>
-									<template v-slot:tabPanel-2>
-										Content 2
-									</template>
-									<template v-slot:tabPanel-3>
-										Content 3
-									</template>
-									<template v-slot:tabPanel-4>
-										Content 4
-									</template>
-								</app-tabs>
-							</div>
+								Bio
+							</h3>
 
 							<div class="my-4">
 								<p class="mb-4 text-lg text-blueGray-700">
@@ -182,14 +180,14 @@
 		<footer-component />
 	</div>
 </template>
-<style scoped>
-.tabs {
+<style>
+.presence:hover {
+  cursor: pointer;
 }
 </style>
 <script>
 import Navbar from "@/components/Navbars/AuthNavbar.vue";
 import FooterComponent from "@/components/Footers/Footer.vue";
-import AppTabs from "@/components/AppTabs.vue";
 
 import team2 from "@/assets/img/vue.jpg";
 import { useStore } from "vuex";
@@ -232,7 +230,6 @@ export default {
 	},
 	components: {
 		Navbar,
-    AppTabs,
 		FooterComponent,
 	},
 };
