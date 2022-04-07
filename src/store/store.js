@@ -60,7 +60,8 @@ const store =  createStore({
                    //Saving the userData from to state
                    commit("setIsAuthenticated",true)
                    commit("setUserData",userData)
-
+                   localStorage.setItem("userData", userData);
+                   localStorage.setItem("IsAuthenticated", true);
                 }).catch(function (error){
                     console.log(error)
                    return 403
@@ -94,6 +95,8 @@ const store =  createStore({
               //Saving response to state
               commit("setIsAuthenticated",true)
               commit("setUserData",userData)
+              localStorage.setItem("userData", userData);
+              localStorage.setItem("IsAuthenticated", true);
             }).catch(function (error){
                 console.log(error)
             })
@@ -113,6 +116,24 @@ const store =  createStore({
               console.log(error)
           })
       },
+
+      logout({commit}){
+        commit("setUserData",null);
+        commit("setIsAuthenticated",false)
+        localStorage.removeItem("userData")
+        localStorage.removeItem("IsAuthenticated")
+      },
+
+      autoLogin({commit}){
+        let userDataString = localStorage.getItem("userData")
+        let isAuthenticated = localStorage.getItem("IsAuthenticated")
+        
+        if(userDataString){
+          let userData = JSON.parse(userDataString);
+          commit("setIsAuthenticated",isAuthenticated)
+          commit("setUserData",userData)
+        }
+      }
     },
 });
 
