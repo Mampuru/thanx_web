@@ -33,6 +33,11 @@
             <!-- <div class="text-blueGray-400 text-center mb-3 font-bold">
               <small>Or sign up with credentials</small>
             </div> -->
+            <div class="text-white px-6 py-4 border-0 rounded relative mb-4 bg-red-500" v-if="error">
+              <span class="inline-block align-middle mr-8">
+                <b class="capitalize">Error </b>{{error}}
+              </span>
+            </div>
             <form>
               <div class="relative w-full mb-3">
                 <label
@@ -190,6 +195,7 @@ export default {
     });
 
     const picked = ref("phone");
+    const error = ref("");
 
     const countryList = computed(() => store.getters.getCountry)
 
@@ -197,10 +203,19 @@ export default {
       store.dispatch("fetchCountry")
     })
    
-    function register(){
-      store.dispatch("register",input.value).then(
+    async function register(){
+      store.commit("setShowLoader",true)
+      try{
+        await store.dispatch("register",input.value)
+      }catch(e){
+        this.error = e;
+        store.commit("setShowLoader",false)
+      }
+      
+      if(error.value === ""){
+        store.commit("setShowLoader",false)
         router.push("/shop/profile")
-      )
+      }
     }
 
     return{
@@ -208,6 +223,7 @@ export default {
       register,
       countryList,
       picked,
+      error
     }
 
   },
