@@ -205,6 +205,9 @@ export default {
    
     async function register(){
       store.commit("setShowLoader",true)
+      if(error.value !== ""){
+        this.error = ""
+      }
       try{
         await store.dispatch("register",input.value)
       }catch(e){

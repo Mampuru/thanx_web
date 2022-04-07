@@ -127,6 +127,9 @@ export default {
     const error = ref("");
 
     async function login() {
+      if(error.value !== ""){
+        this.error = ""
+      }
       store.commit("setShowLoader",true)
       try{
         await store.dispatch("login",input.value)
