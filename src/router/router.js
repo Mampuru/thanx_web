@@ -37,144 +37,180 @@ import RewardsBundle from "@/views/shop/products/RewardsBundle.vue";
 import Vouchers from "@/views/shop/products/Vouchers.vue";
 
 import store from "@/store/store.js";
+import { computed } from "vue";
 
 // routes
 
 const routes = [
-  // {
-  //   path: "/admin",
-  //   redirect: "/admin/dashboard",
-  //   component: Admin,
-  //   children: [
-  //     {
-  //       path: "/admin/dashboard",
-  //       component: Dashboard,
-  //     },
-  //     {
-  //       path: "/admin/settings",
-  //       component: Settings,
-  //     },
-  //     {
-  //       path: "/admin/tables",
-  //       component: Tables,
-  //     },
-  //     {
-  //       path: "/admin/maps",
-  //       component: Maps,
-  //     },
-  //   ],
-  // },
-  {
-    path: "/auth",
-    redirect: "/auth/login",
-    component: Auth,
-    children: [
-      {
-        path: "/auth/login",
-        component: Login,
-      },
-      {
-        path: "/auth/register",
-        component: Register,
-      },
-    ],
-  },
-  {
-    path: "/shop/user_area",
-    component: UserArea,
-  },
-  {
-    path: "/shop/product_details",
-    component: ProductDetails,
-  },
-  {
-    path: "/shop/product/subscription",
-    component: Subscription,
-  },
-  {
-    path: "/shop/product/donation",
-    component: Donations,
-  },
-  {
-    path: "/shop/product/add_fund",
-    component: AddFunds,
-  },
-  {
-    path: "/shop/product/rewards",
-    component: Rewards,
-  },
-  {
-    path: "/shop/product/rewards_bundle",
-    component: RewardsBundle,
-  },
-  {
-    path: "/shop/product/voucher",
-    component: Vouchers,
-  },
-  {
-    path: "/edit_profile",
-    component: EditProfile,
-  },
-  {
-    path: "/:pathMatch(.*)*",
-    name: "NotFound",
-    component: ProfileNotFound,
-  },
-  {
-    path: "/:username",
-    async beforeEnter(to) {
-      const username = to.params.username;
-      const response = await fetch(`https://api.mythanx.xyz/users/${username}`);
+	// {
+	//   path: "/admin",
+	//   redirect: "/admin/dashboard",
+	//   component: Admin,
+	//   children: [
+	//     {
+	//       path: "/admin/dashboard",
+	//       component: Dashboard,
+	//     },
+	//     {
+	//       path: "/admin/settings",
+	//       component: Settings,
+	//     },
+	//     {
+	//       path: "/admin/tables",
+	//       component: Tables,
+	//     },
+	//     {
+	//       path: "/admin/maps",
+	//       component: Maps,
+	//     },
+	//   ],
+	// },
+	{
+		path: "/auth",
+		redirect: "/auth/login",
+		component: Auth,
+		children: [
+			{
+				path: "/auth/login",
+				component: Login,
+			},
+			{
+				path: "/auth/register",
+				component: Register,
+			},
+		],
+	},
+	{
+		path: "/shop/user_area",
+		component: UserArea,
+	},
+	{
+		path: "/shop/product_details",
+		component: ProductDetails,
+	},
+	{
+		path: "/shop/product/subscription",
+		component: Subscription,
+	},
+	{
+		path: "/shop/product/donation",
+		component: Donations,
+	},
+	{
+		path: "/shop/product/add_fund",
+		component: AddFunds,
+	},
+	{
+		path: "/shop/product/rewards",
+		component: Rewards,
+	},
+	{
+		path: "/shop/product/rewards_bundle",
+		component: RewardsBundle,
+	},
+	{
+		path: "/shop/product/voucher",
+		component: Vouchers,
+	},
+	{
+		path: "/edit_profile",
+		component: EditProfile,
+	},
+	{
+		path: "/:pathMatch(.*)*",
+		name: "NotFound",
+		component: ProfileNotFound,
+	},
+	{
+		path: "/:username",
+		async beforeEnter(to) {
+			const username = to.params.username;
+			const response = await fetch(
+				`https://api.mythanx.xyz/users/${username}`
+			);
 
-      if (!response.ok) {
-        return { name: "NotFound" };
-      } else {
-        const { data } = await response.json();
-        store.commit("setProfile", data);
-        console.log({ store });
-      }
-    },
-    component: Profile,
-  },
-  {
-    path: "/:username/followers",
-    async beforeEnter(to) {
-      const username = to.params.username;
-      const response = await fetch(`https://api.mythanx.xyz/users/${username}`);
+			if (!response.ok) {
+				return { name: "NotFound" };
+			} else {
+				const { data } = await response.json();
+				store.commit("setProfile", data);
+				console.log({ store });
+			}
+		},
+		component: Profile,
+	},
+	{
+		path: "/:username/followers",
+		async beforeEnter(to) {
+			const username = to.params.username;
+			const response = await fetch(
+				`https://api.mythanx.xyz/users/${username}`
+			);
 
-      if (!response.ok) {
-        return { name: "NotFound" };
-      } else {
-        const { data } = await response.json();
-        store.commit("setProfile", data);
-      }
-    },
-    component: ProfileFollowers,
-  },
-  {
-    path: "/:username/following",
-    async beforeEnter(to) {
-      const username = to.params.username;
-      const response = await fetch(`https://api.mythanx.xyz/users/${username}`);
+			if (!response.ok) {
+				return { name: "NotFound" };
+			} else {
+				const { data: target } = await response.json();
+				const user = computed(() => store.getters.getUser);
 
-      if (!response.ok) {
-        return { name: "NotFound" };
-      } else {
-        const { data } = await response.json();
-        store.commit("setProfile", data);
-      }
-    },
-    component: ProfileFollowing,
-  },
-  {
-    path: "/",
-    component: Index,
-  },
+				const resp = await store.dispatch(
+					"fetchFollowers",
+					{
+						token: user.value.token,
+						authenticated: user.value.username,
+						username: user.value.username ?? target.username
+					}
+				);
+
+				const { data: followers } = await resp.json();
+
+				store.commit("setProfile", target);
+				store.commit("setFollowers", followers);
+			}
+		},
+		component: ProfileFollowers,
+	},
+	{
+		path: "/:username/following",
+		async beforeEnter(to) {
+			const username = to.params.username;
+			const response = await fetch(
+				`https://api.mythanx.xyz/users/${username}`
+			);
+
+			if (!response.ok) {
+				return { name: "NotFound" };
+			} else {
+				const { data: target } = await response.json();
+				const user = computed(() => store.getters.getUser);
+
+				const resp = await store.dispatch(
+					"fetchFollowing",
+					{
+						token: user.value.token,
+						authenticated: user.value.username,
+						username: user.value.username ?? target.username
+					}
+				);
+
+				const { data: following } = await resp.json();
+
+
+				store.commit("setProfile", target);
+				store.commit("setFollowing", following);
+			}
+		},
+		component: ProfileFollowing,
+	},
+	{
+		path: "/",
+		component: Index,
+	},
 ];
 
 const router = createRouter({
-  history: createWebHistory(),
-  routes,
+	history: createWebHistory(),
+	routes,
 });
 
 export default router;
