@@ -71,7 +71,7 @@
                 >
                   Country
                 </label>
-                <select v-model="input.country"  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                <select v-model="input.country" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
                   <option :key="item" v-for="item in countryList" :value="item.code">{{item.name}}</option>
                 </select>
               </div>
@@ -186,6 +186,7 @@ export default {
       name: "",
       email:"",
       phone: "",
+      country:"",
     });
 
     const picked = ref("phone");
