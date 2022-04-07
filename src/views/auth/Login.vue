@@ -33,6 +33,11 @@
             <!-- <div class="text-blueGray-400 text-center mb-3 font-bold">
               <small>Or sign in with credentials</small>
             </div> -->
+            <div class="text-white px-6 py-4 border-0 rounded relative mb-4 bg-red-500" v-if="error">
+              <span class="inline-block align-middle mr-8">
+                <b class="capitalize">Error </b>{{error}}
+              </span>
+            </div>
             <form>
               <div class="relative w-full mb-3">
                 <label
@@ -117,16 +122,29 @@ export default {
     const input = ref({
       username: "",
       password:"",
-    });
+    })
 
-    function login(){
-      store.dispatch("login",input.value)
-       router.push("/shop/user_area",)
+    const error = ref("");
+
+    async function login() {
+      store.commit("setShowLoader",true)
+      try{
+        await store.dispatch("login",input.value)
+      }catch (e){
+        this.error = e;
+        store.commit("setShowLoader",false)
+      }
+      
+      if(error.value === ""){
+        store.commit("setShowLoader",false)
+        router.push("/shop/user_area")
+      } 
     }
 
     return{
       input,
-      login
+      login,
+      error
     }
 
   },

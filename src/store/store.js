@@ -6,7 +6,8 @@ const store =  createStore({
     return {
       userData: {},
       isAuthenticated: false,
-      country: {}, 
+      country: {},
+      showLoading: false, 
     }
   },
   getters: {
@@ -33,6 +34,9 @@ const store =  createStore({
         setCountry(state, val){
           state.country = val
         },
+        setShowLoader(state, val){
+          state.country = val
+        },
 
     },
     actions: {
@@ -43,7 +47,7 @@ const store =  createStore({
                      password: payload.password,});
         
             let url = 'https://api.mythanx.xyz/auth/login';
-              axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+            axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
               await axios.post(url,payload2,{
                     headers: {
                       'Content-Type': 'application/json'
@@ -64,7 +68,7 @@ const store =  createStore({
                    localStorage.setItem("IsAuthenticated", true);
                 }).catch(function (error){
                     console.log(error)
-                   return 403
+                    throw "No user found to match your credentials."
                 })
         },
 
@@ -99,6 +103,7 @@ const store =  createStore({
               localStorage.setItem("IsAuthenticated", true);
             }).catch(function (error){
                 console.log(error)
+                throw "Please double check your info."
             })
      },
 
