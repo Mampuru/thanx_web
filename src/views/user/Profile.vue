@@ -43,7 +43,7 @@
 						<div class="px-6">
 							<div
 								class="flex border-b border-blueGray-200"
-								style="padding-block: 2em; gap: 2em"
+								style="padding-block: 2em; gap: 3em"
 							>
 								<div>
 									<img
@@ -64,14 +64,14 @@
 									<div
 										style="
 											font-size: 1.25em;
-											line-height: 1.26;
+											line-height: 1.2;
 										"
 									>
 										@{{ user.username }}
 									</div>
 
 									<div
-										class="text-sm leading-normal mt-3 text-blueGray-400 font-bold uppercase"
+										class="text-sm leading-normal mt-2 text-blueGray-400 font-bold uppercase"
 										v-on:click="
 											goto('followers', {
 												base: user.countryCode,
@@ -90,10 +90,14 @@
 									style="
 										padding-block: 2em;
 										gap: 2em;
+										margin-left: 1em;
 										align-items: center;
 									"
 								>
-									<div class="presence" v-on:click="goto('following')">
+									<div
+										class="presence"
+										v-on:click="goto('following')"
+									>
 										<span
 											class="text-xl text-center font-bold block uppercase tracking-wide text-blueGray-600"
 										>
@@ -105,7 +109,11 @@
 											Following
 										</span>
 									</div>
-									<div class="presence" v-on:click="goto('followers')">
+									
+									<div
+										class="presence"
+										v-on:click="goto('followers')"
+									>
 										<span
 											class="text-xl text-center font-bold block uppercase tracking-wide text-blueGray-600"
 										>
@@ -113,9 +121,9 @@
 												user.metadata.presence.followers
 											}}
 										</span>
-										<span class="text-sm text-blueGray-400"
-											>Followers</span
-										>
+										<span class="text-sm text-blueGray-400">
+											Followers
+										</span>
 									</div>
 								</div>
 
@@ -137,6 +145,7 @@
 										>
 											Edit Profile
 										</button>
+
 										<button
 											class="bg-red-500 active:bg-blueGray-800 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
 											type="button"
@@ -145,7 +154,7 @@
 											Logout
 										</button>
 
-                    <button
+										<button
 											class="bg-red-500 active:bg-blueGray-800 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
 											type="button"
 											v-if="!authenticated"
@@ -182,7 +191,7 @@
 </template>
 <style>
 .presence:hover {
-  cursor: pointer;
+	cursor: pointer;
 }
 </style>
 <script>
