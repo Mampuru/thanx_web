@@ -146,12 +146,15 @@
 								</div>
 							</div>
 
-							<h3 class="border-b border-blueGray-200" style="font-size: 2em; padding-bottom: 0.25em">
+							<h3
+								class="border-b border-blueGray-200"
+								style="font-size: 2em; padding-bottom: 0.25em"
+							>
 								Following
 							</h3>
 
 							<div
-								class="tabs flex border-b border-blueGray-200 flex-wrap"
+								class="tabs border-b border-blueGray-200"
 							>
 								<template v-for="(user, index) in following">
 									<div
@@ -217,7 +220,7 @@
 												align-items: center;
 											"
 										>
-											<div v-on:click="goto('following')">
+											<div v-on:click="goto('following', { base: user.username })">
 												<span
 													class="text-xl text-center font-bold block uppercase tracking-wide text-blueGray-600"
 												>
@@ -232,7 +235,7 @@
 													Following
 												</span>
 											</div>
-											<div v-on:click="goto('followers')">
+											<div v-on:click="goto('followers', { base: user.username })">
 												<span
 													class="text-xl text-center font-bold block uppercase tracking-wide text-blueGray-600"
 												>
@@ -245,34 +248,6 @@
 													class="text-sm text-blueGray-400"
 													>Followers</span
 												>
-											</div>
-										</div>
-
-										<div
-											class="flex align-center"
-											style="
-												padding-block: 2em;
-												gap: 2em;
-												align-items: center;
-												margin-left: auto;
-											"
-										>
-											<div
-												class="py-6 px-3 mt-32 sm:mt-0"
-											>
-												<button
-													class="bg-blueGray-700 active:bg-blueGray-800 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
-													type="button"
-													v-on:click="nextPage()"
-												>
-													Edit Profile
-												</button>
-												<button
-													class="bg-red-500 active:bg-blueGray-800 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
-													type="button"
-												>
-													Logout
-												</button>
 											</div>
 										</div>
 									</div>
