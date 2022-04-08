@@ -234,9 +234,7 @@ export default {
     const store = useStore();
 
     const user = computed(() => store.getters.getUser);
-    console.log(user.value);
-    console.log(user.value.token);
-
+  
     return {
       user,
     };
