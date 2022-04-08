@@ -55,18 +55,18 @@
 								<div class="flex flex-wrap">
 									<div class="w-full px-4 flex-1">
 										<form
-											action="{{payfast.url}}"
+											:action="payfast.url"
 											method="post"
 										>
 											<input
 												type="hidden"
 												name="merchant_id"
-												value="{{payfast.id}}"
+												:value="payfast.id"
 											/>
 											<input
 												type="hidden"
 												name="merchant_key"
-												value="{{payfast.key}}"
+												:value="payfast.key"
 											/>
 											<input
 												type="hidden"
