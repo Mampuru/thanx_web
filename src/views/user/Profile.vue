@@ -150,6 +150,7 @@
 											class="bg-red-500 active:bg-blueGray-800 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150"
 											type="button"
 											v-if="authenticated"
+											v-on:click="logout()"
 										>
 											Logout
 										</button>
@@ -215,6 +216,11 @@ export default {
 			router.push("/edit_profile");
 		}
 
+		function logout() {
+			store.dispatch("logout")
+			router.push("/");
+		}
+
 		const current =
 			user.value.username === profile.value.username ? user : profile;
 
@@ -224,6 +230,7 @@ export default {
 
 		return {
 			goto,
+			logout,
 			nextPage,
 			authenticated: user.value.username === profile.value.username,
 			user:
