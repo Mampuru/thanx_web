@@ -136,11 +136,31 @@
                   Password
                 </label>
                 <input
-                  type="password"
+                  :type="type"
                   class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                   placeholder="Password"
                   v-model="input.password"
                 />
+                 <span class="z-10 h-full leading-snug font-normal absolute text-center text-blueGray-700 absolute bg-transparent rounded text-base items-center justify-center w-8 right-0 pr-3 py-3">
+                    <i class="fas fa-eye" v-on:click="showPassword()"></i>
+                  </span>
+                
+              </div>
+
+              <div class="relative w-full mb-3">
+                <label
+                  class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                  htmlFor="grid-password"
+                >
+                  Confirm Password
+                </label>
+                <input
+                  :type="type"
+                  class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                  placeholder="Confirm Password"
+                  v-model="confirm_password"
+                />
+                <span class="text-red-500" v-if="input.password !== confirm_password">Password does not match</span>
               </div>
 
               <div>
@@ -194,8 +214,11 @@ export default {
       country:"",
     });
 
+    const confirm_password = ref("");
     const picked = ref("phone");
     const error = ref("");
+    const showPass = ref(false);
+    const type = ref("password")
 
     const countryList = computed(() => store.getters.getCountry)
 
@@ -221,12 +244,27 @@ export default {
       }
     }
 
+    function showPassword(){
+      if(this.showPass === false){
+          this.showPass = true
+          this.type = "text"
+      }else{
+          this.showPass = false
+          this.type = "password"
+      }
+       console.log(showPass.value)
+    }
+
     return{
       input,
       register,
       countryList,
       picked,
-      error
+      error,
+      confirm_password,
+      showPass,
+      showPassword,
+      type
     }
 
   },
