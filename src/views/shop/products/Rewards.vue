@@ -119,7 +119,7 @@ export default {
 		return {
 			payfast: {
 				url: process.env.VUE_PAY_FAST_URL,
-				id: payfast.id,
+				id: process.env.VUE_PAY_FAST_MERCH_ID,
 				key: process.env.VUE_PAY_FAST_MERCH_KEY,
 			},
 		};
