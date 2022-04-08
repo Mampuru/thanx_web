@@ -32,9 +32,9 @@
             <div class="container px-4 mx-auto">
             <div class="flex flex-wrap">  
                 <div class="w-full px-4 flex-1">
-                    <form action="https://sandbox.payfast.co.za/eng/process" method="post">
-                        <input type="hidden" name="merchant_id" value="10000100">
-                        <input type="hidden" name="merchant_key" value="46f0cd694581a">
+                    <form action="${process.env.PAY_FAST_URL}" method="post">
+                        <input type="hidden" name="merchant_id" value="${process.env.PAY_FAST_MERCH_ID}">
+                        <input type="hidden" name="merchant_key" value="{process.env.PAY_FAST_MERCH_KEY}">
                         <input type="hidden" name="amount" :value="amount">
                         <input type="hidden" name="item_name" value="Voucher">
                         <input class="bg-red-500 text-white active:bg-lightBlue-600 font-bold uppercase text-base px-8 py-3 rounded shadow-md hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="submit" value="PAY FAST">

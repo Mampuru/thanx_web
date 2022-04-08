@@ -54,20 +54,9 @@
               <div class="container px-4 mx-auto">
                 <div class="flex flex-wrap">
                   <div class="w-full px-4 flex-1">
-                    <form
-                      action="https://sandbox.payfast.co.za/eng/process"
-                      method="post"
-                    >
-                      <input
-                        type="hidden"
-                        name="merchant_id"
-                        value="10000100"
-                      />
-                      <input
-                        type="hidden"
-                        name="merchant_key"
-                        value="46f0cd694581a"
-                      />
+                    <form action="${process.env.PAY_FAST_URL}" method="post">
+                        <input type="hidden" name="merchant_id" value="${process.env.PAY_FAST_MERCH_ID}">
+                        <input type="hidden" name="merchant_key" value="{process.env.PAY_FAST_MERCH_KEY}">
                       <input type="hidden" name="amount" :value="amount" />
                       <input type="hidden" name="item_name" value="Add Funds" />
                       <input
