@@ -27,6 +27,7 @@
               <br />
               <div class="mb-3 pt-0">
                 <input
+                  v-model="amount"
                   type="text"
                   placeholder="0.00"
                   class="
@@ -67,7 +68,7 @@
                         name="merchant_key"
                         value="46f0cd694581a"
                       />
-                      <input type="hidden" name="amount" value="100.00" />
+                      <input type="hidden" name="amount" :value="amount" />
                       <input type="hidden" name="item_name" value="Add Funds" />
                       <input
                         class="
@@ -122,33 +123,6 @@
                       PayPal
                     </button>
                   </div>
-                  <div class="w-full px-4 flex-1">
-                    <button
-                      class="
-                        bg-blueGray-700
-                        text-white
-                        active:bg-lightBlue-600
-                        font-bold
-                        uppercase
-                        text-base
-                        px-8
-                        py-3
-                        rounded
-                        shadow-md
-                        hover:shadow-lg
-                        outline-none
-                        focus:outline-none
-                        mr-1
-                        mb-1
-                        ease-linear
-                        transition-all
-                        duration-150
-                      "
-                      type="button"
-                    >
-                      Credit Card
-                    </button>
-                  </div>
                 </div>
               </div>
             </div>
@@ -162,8 +136,16 @@
 <script>
 import Navbar from "@/components/Navbars/AuthNavbar.vue";
 import FooterComponent from "@/components/Footers/Footer.vue";
+import {ref} from "vue"
 
 export default {
+  setup(){
+    const amount = ref("");
+    
+    return {
+      amount
+    };
+  },
   data() {
     return {};
   },
