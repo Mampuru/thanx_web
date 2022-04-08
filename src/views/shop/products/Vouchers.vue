@@ -117,12 +117,16 @@ export default {
 		};
 	},
 	data() {
+		const payfast = {
+			url: process.env.VUE_PAY_FAST_URL,
+			id: process.env.VUE_PAY_FAST_MERCH_ID,
+			key: process.env.VUE_PAY_FAST_MERCH_KEY,
+		};
+
+		console.log(payfast);
+
 		return {
-			payfast: {
-				url: process.env.VUE_PAY_FAST_URL,
-				id: process.env.VUE_PAY_FAST_MERCH_ID,
-				key: process.env.VUE_PAY_FAST_MERCH_KEY,
-			},
+			payfast,
 		};
 	},
 	components: {
