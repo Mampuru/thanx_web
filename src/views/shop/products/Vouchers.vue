@@ -55,13 +55,13 @@
 								<div class="flex flex-wrap">
 									<div class="w-full px-4 flex-1">
 										<form
-											action="{{payfast.url}}"
+											:action="payfast.url"
 											method="post"
 										>
 											<input
 												type="hidden"
 												name="merchant_id"
-												value="{{payfast.id}}"
+												:value="payfast.id"
 											/>
 											<input
 												type="hidden"
@@ -109,15 +109,6 @@ import FooterComponent from "@/components/Footers/Footer.vue";
 import { ref } from "vue";
 
 export default {
-	computed: {
-		payfast() {
-			return {
-				url: process.env.VUE_PAY_FAST_URL,
-				id: process.env.VUE_PAY_FAST_MERCH_ID,
-				key: process.env.VUE_PAY_FAST_MERCH_KEY,
-			};
-		},
-	},
 	setup() {
 		const amount = ref("");
 
@@ -126,7 +117,13 @@ export default {
 		};
 	},
 	data() {
-		return {};
+		return {
+			payfast: {
+				url: process.env.VUE_APP_PAY_FAST_URL,
+				id: process.env.VUE_APP_PAY_FAST_MERCH_ID,
+				key: process.env.VUE_APP_PAY_FAST_MERCH_KEY,
+			},
+		};
 	},
 	components: {
 		Navbar,

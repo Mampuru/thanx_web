@@ -108,15 +108,6 @@ import FooterComponent from "@/components/Footers/Footer.vue";
 import { ref } from "vue";
 
 export default {
-	computed: {
-		payfast() {
-			return {
-				url: process.env.VUE_PAY_FAST_URL,
-				id: process.env.VUE_PAY_FAST_MERCH_ID,
-				key: process.env.VUE_PAY_FAST_MERCH_KEY,
-			};
-		},
-	},
 	setup() {
 		const amount = ref("");
 
@@ -125,7 +116,13 @@ export default {
 		};
 	},
 	data() {
-		return {};
+		return {
+			payfast: {
+				url: process.env.VUE_APP_PAY_FAST_URL,
+				id: process.env.VUE_APP_PAY_FAST_MERCH_ID,
+				key: process.env.VUE_APP_PAY_FAST_MERCH_KEY,
+			},
+		};
 	},
 	components: {
 		Navbar,
