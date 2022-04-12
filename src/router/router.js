@@ -134,7 +134,6 @@ const routes = [
 			} else {
 				const { data } = await response.json();
 				store.commit("setProfile", data);
-				console.log({ store });
 			}
 		},
 		component: Profile,

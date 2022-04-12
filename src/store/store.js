@@ -128,7 +128,7 @@ const store = createStore({
 					//Saving response to state
 					commit("setIsAuthenticated", true);
 					commit("setUserData", userData);
-					localStorage.setItem("userData", userData);
+					localStorage.setItem("userData", JSON.stringify(userData));
 					localStorage.setItem("IsAuthenticated", true);
 				})
 				.catch(function (error) {
