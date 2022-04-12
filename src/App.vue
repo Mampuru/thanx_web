@@ -11,11 +11,10 @@ export default {
 	name: "App",
 	setup() {
 		const store = useStore();
-		const showLoading = computed(() => store.state.showLoading);
-
-		return {
-			showLoading,
-		};
+		const showLoading = computed(() => {
+			return store.state.showLoading;
+		});
+		return { showLoading };
 	},
 	created() {
 		this.$store.dispatch(`autoLogin`);

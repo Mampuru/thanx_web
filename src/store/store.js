@@ -132,8 +132,7 @@ const store = createStore({
 					localStorage.setItem("IsAuthenticated", true);
 				})
 				.catch(function (error) {
-					console.log(error);
-					throw "Please double check your info.";
+					throw error.response.data.error;
 				});
 		},
 
