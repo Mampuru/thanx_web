@@ -1,4 +1,7 @@
-# thanx_web
+# Thanx_web
+
+[![My Skills](https://skillicons.dev/icons?i=vue,js,tailwind)](https://skillicons.dev)
+
 Vue JS website 
 
 - npm run install:clean (If you are on a linux based terminal)
